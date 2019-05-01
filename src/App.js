@@ -8,9 +8,9 @@ class App extends Component {
   // Setting this.state.tomatoes to the tomatoes array
   state = {
     tomatoes,
-    count: 0
+    count: 0,
+    trackedIdArray: []
   };
-  
 
   // Shuffle functions
   shuffle = a => {
@@ -22,36 +22,43 @@ class App extends Component {
   }
 
   shuffleTomatoes = () => {
-    console.log("shuffflleee")
     // Filter this.state.friends for friends with an id not equal to the id being removed
     const shuffledTomatoes = this.shuffle(this.state.tomatoes.slice());
     // Set this.state.friends equal to the new friends array
     this.setState({ tomatoes: shuffledTomatoes });
   };
 
-
-
-  // Scoring function
-
-  handleClick(id) {
-    if(id )
-    this.setState({ clicked: true})
-    console.log("button clicked")
-  }
+  updateTrackedIdArray = id => {
+    const updatedArray = [];
+    for(let i = 0; i < this.state.trackedIdArray.length; i++) {
+        updatedArray.push(this.state.trackedIdArray[i]);
+    };
+    updatedArray.push(id);
+    this.setState({ trackedIdArray: updatedArray });
+}
+  
 
   handleIncrement = (id) => {
-    console.log(id)
     this.setState({ count: this.state.count + 1 });
   };
 
-  comboFunction = (id) => {
-    this.handleIncrement(id);
-    this.handleClick(id);
-    this.shuffleTomatoes();
+  // logic for conditions
+  comboFunction = id => {
+    //searched through array for clicked ids
+    if(this.state.trackedIdArray.includes(id)) {
+      this.setState({ count: 0, trackedIdArray: [] });
+    } else {
+      this.handleIncrement();
+      this.shuffleTomatoes();
+      this.updateTrackedIdArray(id)
+    }
   }
+ 
+
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
+    console.log(this.state.trackedIdArray)
     return (
       <Wrapper>
       <Title>Clicky Tomatoes</Title>
@@ -74,11 +81,3 @@ class App extends Component {
 
 export default App;
 
-
-/*****
-1. We want to hold a counter in our component’s state just like we hold the tomato list
-2. We want to create a function in the same component that when called, calls this.setState and updates our counter
-3. We want to probably pass this function to each TomatoCard like we do with the shuffle function
-4. We want to run this function every time we click on a card, just like we do with the shuffle function!
-Oh and 5. You want to render the counter somewhere on the page so you can see the counter updating :]
- */
