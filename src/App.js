@@ -9,8 +9,13 @@ class App extends Component {
   state = {
     tomatoes,
     count: 0,
+    topScore: 0,
     trackedIdArray: []
   };
+ 
+  componentDidMount() {
+    this.shuffleTomatoes();
+}
 
   // Shuffle functions
   shuffle = a => {
@@ -28,6 +33,7 @@ class App extends Component {
     this.setState({ tomatoes: shuffledTomatoes });
   };
 
+
   updateTrackedIdArray = id => {
     const updatedArray = [];
     for(let i = 0; i < this.state.trackedIdArray.length; i++) {
@@ -37,10 +43,16 @@ class App extends Component {
     this.setState({ trackedIdArray: updatedArray });
 }
   
-
   handleIncrement = (id) => {
     this.setState({ count: this.state.count + 1 });
   };
+
+  // Top score
+  TopScore = () => {
+    if(this.state.count + 1 > this.state.topScore){
+      this.setState({ topScore: this.state.count + 1})
+    }
+  }
 
   // logic for conditions
   comboFunction = id => {
@@ -51,6 +63,7 @@ class App extends Component {
       this.handleIncrement();
       this.shuffleTomatoes();
       this.updateTrackedIdArray(id)
+      this.TopScore();
     }
   }
  
@@ -63,10 +76,11 @@ class App extends Component {
       <Wrapper>
       <Title>Clicky Tomatoes</Title>
       <div className="card-body">
-          <p className="card-text">Click Count: {this.state.count}</p>
+          <p className="card-text">Score: {this.state.count}</p>
+          <p className="card-text">Top Score: {this.state.topScore}</p>
       </div>
         {this.state.tomatoes.map(tomato => (
-          <TomatoCard
+            <TomatoCard
             id={tomato.id}
             key={tomato.id}
             image={tomato.image}

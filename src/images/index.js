@@ -7,6 +7,9 @@ import six from './6.jpg';
 import seven from './7.jpg';
 import eight from './8.jpg';
 import nine from './9.jpg';
+import ten from './10.jpg';
+import eleven from './11.jpg';
+import twelve from './12.jpg';
 
 /* eslint-disable no-unused-expressions */
 const tomatoes = [
@@ -48,7 +51,19 @@ const tomatoes = [
      {
        "id": 9,
        "image": nine,
-     }
+     },
+     {
+      "id": 10,
+      "image": ten,
+    },
+    {
+      "id": 11,
+      "image": eleven,
+    },
+    {
+      "id": 12,
+      "image": twelve,
+    }
 ];
   
 export default tomatoes;

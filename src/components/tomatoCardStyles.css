@@ -1,7 +1,7 @@
 .card {
      background: #fff;
      border-radius: 2px;
-     height: 325px;
+     height: 100%;
      margin: 1rem;
      position: relative;
      width: 325px;
@@ -13,7 +13,7 @@
      height: 60%;
      overflow: hidden;
      text-align: center;
-     background:#6CADDC;
+     background:rgb(186, 18, 18);
    }
    .card > .img-container > img {
      width: 60%
