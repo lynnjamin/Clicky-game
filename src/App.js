@@ -3,6 +3,7 @@ import TomatoCard from "./components/TomatoCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import tomatoes from "./images";
+import "./App.css";
 
 class App extends Component {
   // Setting this.state.tomatoes to the tomatoes array
@@ -74,11 +75,12 @@ class App extends Component {
     console.log(this.state.trackedIdArray)
     return (
       <Wrapper>
-      <Title>Clicky Tomatoes</Title>
-      <div className="card-body">
-          <p className="card-text">Score: {this.state.count}</p>
-          <p className="card-text">Top Score: {this.state.topScore}</p>
+      <Title>Clicky Tomatoes
+      <div className="scores">
+          <div className="card-text">Score: {this.state.count}</div>
+          <div className="card-text">Top Score: {this.state.topScore}</div>
       </div>
+      </Title>
         {this.state.tomatoes.map(tomato => (
             <TomatoCard
             id={tomato.id}
